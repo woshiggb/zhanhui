@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>班级作品展示</title>
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css">
+  <style>
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 30px;
+      font-size: 3rem;
+      color: #333;
+    }
+    .custom-color {
+      background-color: #f5e6ca;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>班级作品展示</h1>
+    <div class="form-group">
+      <label for="color-select">选择颜色</label>
+      <select class="form-control" id="color-select">
+        <option value="">默认</option>
+        <option value="custom">柔和的色调</option>
+        <option value="primary">蓝色</option>
+        <option value="secondary">灰色</option>
+        <option value="success">绿色</option>
+        <option value="danger">红色</option>
+        <option value="warning">黄色</option>
+        <option value="info">浅蓝色</option>
+        <option value="light">浅灰色</option>
+        <option value="dark">深灰色</option>
+      </select>
+    </div>
+    <ul class="list-group list-group-flush">
+      {% for file in files %}
+        <li class="list-group-item">
+          <a href="{{ file[1] }}" class="btn btn-outline-{{ get_file_icon(file[0]) }} btn-lg btn-block">{{ file[0] }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <script>
+    const colorSelect = document.getElementById('color-select')
+    const body = document.body
+
+    colorSelect.addEventListener('change', function() {
+      const color = this.value
+
+      if (color === 'custom') {
+        body.classList.add('custom-color')
+      } else {
+        body.classList.remove('custom-color')
+        body.classList.add(`bg-${color}`)
+      }
+    })
+  </script>
+</body>
+</html>
